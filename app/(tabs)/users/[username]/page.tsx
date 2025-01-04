@@ -5,6 +5,8 @@ import UserListTweet from "@/components/user-tweet-list";
 import getSession from "@/lib/session";
 import { redirect } from "next/navigation";
 import LogoutBtn from "@/components/logout-button";
+import UserFavoriteList from "@/components/timer/favorite-list";
+import UserTabs from "@/components/user-tabs";
 
 export default async function User({
   params,
@@ -46,11 +48,18 @@ export default async function User({
         </div>
       </div>
 
-      <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      <UserTabs user={user} />
+
+      {/* <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {user?.tweet?.map((tweet) => (
           <UserListTweet key={tweet.id} user={user} {...tweet} />
         ))}
       </div>
+      <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {user?.Favorite?.map((fav) => (
+          <UserFavoriteList key={fav.id} imageId={fav.imageId} id={fav.id} />
+        ))}
+      </div> */}
     </div>
   );
 }

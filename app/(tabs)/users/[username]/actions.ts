@@ -10,6 +10,12 @@ export async function getUser(username: string) {
       username,
     },
     include: {
+      Favorite: {
+        select: {
+          id: true,
+          imageId: true,
+        },
+      },
       tweet: {
         select: {
           id: true,

@@ -1,0 +1,9 @@
+-- CreateTable
+CREATE TABLE "Favorite" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "userId" INTEGER NOT NULL,
+    "imageUrl" TEXT NOT NULL,
+    "imageId" TEXT NOT NULL,
+    CONSTRAINT "Favorite_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+);
