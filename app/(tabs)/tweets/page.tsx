@@ -5,7 +5,7 @@ import { unstable_cache as nextCache, revalidatePath } from "next/cache";
 
 const getCachedProducts = nextCache(getInitialTweets, ["home-products"]);
 
-async function getInitialTweets() {
+export async function getInitialTweets() {
   const tweets = await db.tweet.findMany({
     select: {
       title: true,

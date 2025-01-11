@@ -49,17 +49,6 @@ export default async function User({
       </div>
 
       <UserTabs user={user} />
-
-      {/* <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {user?.tweet?.map((tweet) => (
-          <UserListTweet key={tweet.id} user={user} {...tweet} />
-        ))}
-      </div>
-      <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {user?.Favorite?.map((fav) => (
-          <UserFavoriteList key={fav.id} imageId={fav.imageId} id={fav.id} />
-        ))}
-      </div> */}
     </div>
   );
 }

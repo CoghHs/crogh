@@ -12,7 +12,7 @@ export default function UserFavoriteList({ imageId, id }: FavoriteListProps) {
       <div className=" rounded-md">
         <Image
           className="object-cover size-28 rounded-md"
-          width={40}
+          width={500}
           height={40}
           src={imageId}
           alt={imageId}

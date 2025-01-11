@@ -32,7 +32,7 @@ export default function TabBar({ username }: { username: string }) {
   }, [pathname]);
 
   return (
-    <div className="fixed left-0 top-0 w-full flex items-center justify-between px-10 py-6 bg-white *:text-black">
+    <div className="fixed left-0 top-0 w-full flex items-center justify-between px-10 py-6 bg-white">
       <div className="flex items-center gap-10">
         <Link href="/tweets" className="flex flex-col items-center gap-px">
           <h1 className="font-serif  text-2xl">COGH</h1>
