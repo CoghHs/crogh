@@ -12,7 +12,7 @@ export default function Board({ initialTweets }: TweetListProps) {
   const [tweets, setTweets] = useState(initialTweets.slice(0, 7));
 
   return (
-    <div className="p-5 grid grid-cols-6 gap-4">
+    <div className="mt-6 grid grid-cols-6 gap-4">
       {tweets.map((tweet, index) => {
         const colSpanClass =
           index === 0

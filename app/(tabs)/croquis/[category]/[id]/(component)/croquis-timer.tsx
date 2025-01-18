@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation"; // useParams 사용
-import { fetchRandomPoses } from "@/lib/constants";
 
 import Image from "next/image";
 
@@ -11,7 +10,8 @@ import { AnimatePresence, motion } from "motion/react";
 import TimerControls from "@/components/timer/timer-controls";
 import Timer from "@/components/timer/timer";
 import NavigationButtons from "@/components/timer/navigation-button";
-import FavoriteButton from "./favorite-button";
+import FavoriteButton from "@/components/timer/favorite-button";
+import { fetchRandomPoses } from "@/api/croquies";
 
 interface PosePage {
   results: PoseProps[];

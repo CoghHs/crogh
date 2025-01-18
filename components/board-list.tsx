@@ -31,8 +31,10 @@ export default function BoardList({
           fill
           priority
         />
-        <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-          <span className="text-white font-bold text-lg">{title}</span>
+        <div className="absolute inset-0 bg-black bg-opacity-70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+          <span className="text-white font-extrabold font-serif text-2xl text-shadow">
+            {title}
+          </span>
         </div>
       </div>
     </Link>

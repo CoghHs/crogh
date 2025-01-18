@@ -10,8 +10,9 @@ export default function Croquis() {
           height={100}
           src="/images/backphoto.png"
           alt="background"
-          className="w-full h-[400px] object-cover"
+          className="w-full h-[400px] object-cover rounded-lg"
           quality={100}
+          priority
         />
         <span className="absolute top-1/2 left-8 transform -translate-y-1/2 text-white text-lg font-medium max-w-xl text-shadow">
           <span className="text-3xl font-bold">Unsplash </span>

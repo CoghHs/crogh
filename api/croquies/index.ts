@@ -1,22 +1,16 @@
-export const PASSWORD_MIN_LENGTH = 4;
-export const PASSWORD_REGEX = new RegExp(
-  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*?[#?!@$%^&*-]).+$/
-);
-export const PASSWORD_REGEX_ERROR =
-  "Passwords must contain at least one UPPERCASE, lowercase, number and special characters #?!@$%^&*-";
+import { PAGE_DEFAULT, PAGE_SIZE, TOTAL_PAGE } from "@/constants";
 
 // Unsplash API URLs
 export const BASE_URL = "https://api.unsplash.com";
 export const SEARCH_URL = `${BASE_URL}/search/photos`;
 export const PHOTO_DETAIL_URL = `${BASE_URL}/photos`;
-
 const ACCESS_KEY = process.env.NEXT_PUBLIC_ACCESS_KEY;
 
 // 포즈목록
 export async function fetchPoses(
   query: string = "pose",
-  perPage: number = 10,
-  page: number = 1
+  perPage: number = PAGE_SIZE,
+  page: number = PAGE_DEFAULT
 ) {
   const response = await fetch(
     `${SEARCH_URL}?query=${query}&per_page=${perPage}&page=${page}&client_id=${ACCESS_KEY}`
@@ -33,11 +27,11 @@ export async function fetchPoses(
 
 export async function fetchRandomPoses(
   query: string = "pose",
-  perPage: number = 10
+  perPage: number = PAGE_SIZE
 ) {
   // 페이지 번호를 랜덤하게 선택 (1부터 totalPages까지)
-  const totalPages = 50; // 예시로 30 페이지라고 가정 (API에서 totalPages 값을 받아올 수 있다면 동적으로 처리 가능)
-  const randomPage = Math.floor(Math.random() * totalPages) + 1;
+  // 예시로 30 페이지라고 가정 (API에서 totalPages 값을 받아올 수 있다면 동적으로 처리 가능)
+  const randomPage = Math.floor(Math.random() * TOTAL_PAGE) + 1;
 
   const response = await fetch(
     `${SEARCH_URL}?query=${query}&per_page=${perPage}&page=${randomPage}&client_id=${ACCESS_KEY}`

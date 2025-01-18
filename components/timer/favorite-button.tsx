@@ -64,9 +64,7 @@ export default function FavoriteButton({
       ) : (
         <OutlineHandThumbUpIcon className="size-5" />
       )}
-      <span>
-        {isFav ? `즐겨찾기 해제 (${favCount})` : `즐겨찾기 (${favCount})`}
-      </span>
+      <span>{isFav ? `즐겨찾기 해제` : `즐겨찾기`}</span>
     </button>
   );
 }

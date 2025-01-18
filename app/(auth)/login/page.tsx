@@ -4,8 +4,9 @@ import FormButton from "@/components/button";
 import FormInput from "@/components/input";
 import { useFormState } from "react-dom";
 import { login } from "./actions";
-import { PASSWORD_MIN_LENGTH } from "@/lib/constants";
+
 import Link from "next/link";
+import { PASSWORD_MIN_LENGTH } from "@/constants";
 
 export default function LogIn() {
   const [state, dispatch] = useFormState(login, null);

@@ -1,5 +1,5 @@
-import CroquisTimer from "@/components/timer/croquis-timer";
 import getSession from "@/lib/session";
+import CroquisTimer from "./(component)/croquis-timer";
 
 export default async function PoseDetail() {
   const session = await getSession();

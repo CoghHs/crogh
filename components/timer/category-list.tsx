@@ -1,4 +1,4 @@
-import { fetchPoses } from "@/lib/constants";
+import { fetchPoses } from "@/api/croquies";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -24,7 +24,7 @@ export default async function CategoryList({ query, text }: CategoryListProps) {
             alt={pose.alt_description}
           />
           <div className="absolute inset-0 bg-black bg-opacity-70 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center rounded-lg">
-            <span className="text-white rounded-full font-extrabold text-2xl font-serif flex px-6">
+            <span className="text-white rounded-full font-extrabold text-2xl font-serif flex px-6 text-shadow">
               {text}
             </span>
           </div>
