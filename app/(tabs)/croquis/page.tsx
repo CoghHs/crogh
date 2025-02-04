@@ -1,4 +1,4 @@
-import Category from "@/components/timer/category";
+import CategoryBoardLayout from "@/components/timer/category";
 import Image from "next/image";
 
 export default function Croquis() {
@@ -22,7 +22,7 @@ export default function Croquis() {
           사이트입니다.
         </span>
       </div>
-      <Category />
+      <CategoryBoardLayout />
     </div>
   );
 }

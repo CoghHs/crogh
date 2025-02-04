@@ -57,14 +57,14 @@ export default function FavoriteButton({
   return (
     <button
       onClick={onClick}
-      className="flex items-center gap-2 text-neutral-400 text-sm border border-neutral-400 rounded-full p-2"
+      className="flex items-center justify-center text-neutral-500 text-sm rounded-full p-2"
     >
       {isFav ? (
         <HandThumbUpIcon className="size-5" />
       ) : (
         <OutlineHandThumbUpIcon className="size-5" />
       )}
-      <span>{isFav ? `즐겨찾기 해제` : `즐겨찾기`}</span>
+      <span>{isFav}</span>
     </button>
   );
 }

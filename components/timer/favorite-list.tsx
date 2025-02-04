@@ -6,9 +6,9 @@ interface FavoriteListProps {
   id: number;
 }
 
-export default function UserFavoriteList({ imageId, id }: FavoriteListProps) {
+export default function FavoriteList({ imageId, id }: FavoriteListProps) {
   return (
-    <Link className="flex gap-5 items-center" href={`/tweet/${id}`}>
+    <Link className="flex gap-5 items-center" href={`/croquis/${imageId}`}>
       <div className=" rounded-md">
         <Image
           className="object-cover size-28 rounded-md"

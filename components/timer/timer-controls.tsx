@@ -1,11 +1,12 @@
-// TimerController.tsx
-interface TimerControlsPorps {
+import { timeOptions } from "@/constants";
+
+interface TimerControlsProps {
   handleTimeChange: (time: number | null) => void;
 }
 
 export default function TimerControls({
   handleTimeChange,
-}: TimerControlsPorps) {
+}: TimerControlsProps) {
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedTime =
       event.target.value === "null" ? null : Number(event.target.value);
@@ -18,12 +19,11 @@ export default function TimerControls({
         onChange={handleSelectChange}
         className="py-2 bg-gray-500 text-white rounded"
       >
-        <option value={60}>1 Min</option>
-        <option value={180}>3 Min</option>
-        <option value={300}>5 Min</option>
-        <option value={600}>10 Min</option>
-        <option value={900}>15 Min</option>
-        <option value="null">Unlimited</option>
+        {timeOptions.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
       </select>
     </div>
   );

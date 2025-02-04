@@ -4,7 +4,7 @@ import Board from "../board";
 import { CATEGORY_LIST } from "@/constants";
 import React from "react";
 
-export default async function Category() {
+export default async function CategoryBoardLayout() {
   const initialTweets = await getInitialTweets();
   return (
     <div className="flex flex-col mt-5">

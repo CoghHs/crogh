@@ -32,19 +32,10 @@ export default function TabBar({ username }: { username: string }) {
   }, [pathname]);
 
   return (
-    <div className="fixed left-0 top-0 w-full flex items-center justify-between px-10 py-6 bg-white">
-      <div className="flex items-center gap-10">
-        <Link href="/tweets" className="flex flex-col items-center gap-px">
-          <h1 className="font-serif  text-2xl">COGH</h1>
-        </Link>
-        <Link href="/tweets" className="flex flex-col items-center gap-px">
-          {pathname === "/tweets" ? (
-            <span className="px-5 py-2.5 bg-black text-white rounded-3xl">
-              홈
-            </span>
-          ) : (
-            <span className="px-5 py-2.5 rounded-3xl">홈</span>
-          )}
+    <div className="fixed left-0 top-0 w-full flex items-center justify-between px-10 py-6 z-20 bg-white">
+      <div className="flex items-center gap-6">
+        <Link href="/croquis" className="flex flex-col items-center gap-px">
+          <h1 className="font-serif  text-2xl">CROGH</h1>
         </Link>
         <Link href="/croquis" className="flex flex-col items-center gap-px">
           {pathname === "/croquis" ? (
@@ -53,6 +44,15 @@ export default function TabBar({ username }: { username: string }) {
             </span>
           ) : (
             <span className="px-5 py-2.5 rounded-3xl">크로키</span>
+          )}
+        </Link>
+        <Link href="/tweets" className="flex flex-col items-center gap-px">
+          {pathname === "/tweets" ? (
+            <span className="px-5 py-2.5 bg-black text-white rounded-3xl">
+              게시판
+            </span>
+          ) : (
+            <span className="px-5 py-2.5 rounded-3xl">게시판</span>
           )}
         </Link>
         <Link href="/tweets/add" className="flex flex-col items-center gap-px">

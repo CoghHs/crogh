@@ -20,7 +20,7 @@ export async function middleware(request: NextRequest) {
     }
   } else {
     if (exists) {
-      return NextResponse.redirect(new URL("/tweets", request.url));
+      return NextResponse.redirect(new URL("/croquis", request.url));
     }
   }
 }
