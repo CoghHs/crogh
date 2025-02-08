@@ -15,10 +15,9 @@ export const PAGE_DEFAULT = 1;
 export const TOTAL_PAGE = 50;
 
 export const timeOptions = [
-  { value: 60, label: "1 Min" },
-  { value: 180, label: "3 Min" },
-  { value: 300, label: "5 Min" },
-  { value: 600, label: "10 Min" },
-  { value: 900, label: "15 Min" },
-  { value: "null", label: "Unlimited" },
+  { value: 60, label: "1 분" },
+  { value: 180, label: "3 분" },
+  { value: 300, label: "5 분" },
+  { value: 600, label: "10 분" },
+  { value: 900, label: "15 분" },
 ];

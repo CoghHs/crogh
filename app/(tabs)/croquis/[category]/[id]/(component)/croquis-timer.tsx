@@ -6,9 +6,12 @@ import Image from "next/image";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { AnimatePresence, motion } from "motion/react";
 import {
+  ArrowPathIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
+  PauseIcon,
   PhotoIcon,
+  PlayIcon,
 } from "@heroicons/react/24/solid";
 import { fetchRandomPoses } from "@/api/croquies";
 import { timeOptions } from "@/constants";
@@ -22,20 +25,33 @@ interface PosePage {
 
 interface PoseProps {
   id: string;
+  imageUrl: string;
   urls: {
     full: string;
+    regular: string;
   };
   alt_description: string;
 }
 
 export default function CroquisTimer({ userId }: { userId: number }) {
   const { category } = useParams();
+  const currentCategory = Array.isArray(category)
+    ? category[0]
+    : category || "";
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [selectedTime, setSelectedTime] = useState<number>(60);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
   const [timeLeft, setTimeLeft] = useState<number | null>(selectedTime);
   const [isPaused, setIsPaused] = useState(false);
   const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 열기/닫기 상태
+  const [modalPosition, setModalPosition] = useState<{
+    top: number;
+    left: number;
+    width: number;
+  }>({ top: 0, left: 0, width: 0 });
+
+  const timerRef = useRef<HTMLDivElement | null>(null);
   const constraintsRef = useRef(null);
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
@@ -58,6 +74,13 @@ export default function CroquisTimer({ userId }: { userId: number }) {
       fetchNextPage();
     }
   }, [currentIndex, poses.length, hasNextPage, fetchNextPage]);
+
+  useEffect(() => {
+    if (timerRef.current) {
+      const { top, left, width } = timerRef.current.getBoundingClientRect();
+      setModalPosition({ top, left, width });
+    }
+  }, [isModalOpen]);
 
   // 타이머 종료 시 알림 및 소리 재생
   const sendNotificationAndSound = () => {
@@ -116,14 +139,19 @@ export default function CroquisTimer({ userId }: { userId: number }) {
     setIsTimerRunning(false);
   };
 
-  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedTime =
-      event.target.value === "null" ? null : Number(event.target.value);
-    handleTimeChange(selectedTime);
+  const handleSelectChange = (time: string | number) => {
+    if (typeof time === "number") {
+      handleTimeChange(time);
+      setIsModalOpen(false); // 시간이 선택되면 모달 닫기
+    }
   };
 
   const startTimer = () => {
     setIsTimerRunning(true);
+  };
+
+  const handleTimerClick = () => {
+    setIsModalOpen(true); // 타이머 클릭 시 모달 열기
   };
 
   useEffect(() => {
@@ -155,7 +183,7 @@ export default function CroquisTimer({ userId }: { userId: number }) {
         )}
 
         <Image
-          src={pose.urls.full}
+          src={pose.urls.regular}
           alt={pose.alt_description}
           layout="fill"
           objectFit="contain"
@@ -168,73 +196,99 @@ export default function CroquisTimer({ userId }: { userId: number }) {
 
         {/* 타이머 및 버튼 */}
         <motion.div
+          ref={timerRef}
           className="bg-black bg-opacity-30 rounded-2xl p-6 flex flex-col justify-center items-center shadow-lg z-10"
           drag
           dragConstraints={constraintsRef}
           dragElastic={1}
         >
-          {/* Favorite 버튼 */}
-          <motion.div
-            className=" bg-white rounded-full shadow-xl cursor-pointer"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <FavoriteButton imageId={pose.urls.full} userId={userId} />
-          </motion.div>
-          <div className="mb-4">
-            <select
-              onChange={handleSelectChange}
-              className="py-2 bg-gray-500 text-white rounded"
+          <div className="flex items-center justify-between w-full">
+            <div
+              onClick={resetTimer}
+              className="cursor-pointer hover:scale-110 transition-all size-6 text-white"
             >
-              {timeOptions.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-          </div>
-          <p className="text-4xl font-extrabold text-white">
-            {formatTime(timeLeft ?? selectedTime)}
-          </p>
+              <ArrowPathIcon />
+            </div>
+            {/* 타이머 시간 표시 클릭 시 모달 열림 */}
+            <p
+              onClick={handleTimerClick}
+              className="text-4xl font-extrabold text-white cursor-pointer hover:text-gray-200 transition-colors"
+            >
+              {formatTime(timeLeft ?? selectedTime)}
+            </p>
 
-          {/* 네비게이션 버튼과 타이머 */}
+            <div className="cursor-pointer hover:scale-110 transition-all">
+              <FavoriteButton
+                imageUrl={pose.urls.full}
+                imageId={pose.id}
+                userId={userId}
+                category={currentCategory}
+              />
+            </div>
+          </div>
+
+          {/* 네비게이션 버튼 */}
           <div className="flex items-center space-x-4 mt-4">
             <button
               className="text-white px-4 py-2 rounded"
               onClick={handlePrevious}
             >
-              <ChevronLeftIcon className="size-10" />
+              <ChevronLeftIcon className="size-8 hover:text-gray-200 transition-colors" />
             </button>
 
             {!isTimerRunning ? (
               <button
                 onClick={startTimer}
-                className="bg-gradient-to-r from-pink-500 to-purple-500 text-white font-bold py-3 px-6 rounded-full transform hover:scale-105 transition-all shadow-lg"
+                className="text-white py-3 px-6 hover:text-gray-200 transition-colors"
               >
-                ⏱️
+                <PlayIcon className="size-8" />
               </button>
             ) : (
               <button
                 onClick={() => setIsTimerRunning(false)}
-                className="bg-yellow-500 text-white py-3 px-6 rounded"
+                className="text-white py-3 px-6 hover:text-gray-200 transition-colors"
               >
-                ⏸️
+                <PauseIcon className="size-8" />
               </button>
             )}
 
             <button
-              className=" text-white px-4 py-2 rounded"
+              className="text-white px-4 py-2 rounded"
               onClick={handleNext}
             >
-              <ChevronRightIcon className="size-10" />
+              <ChevronRightIcon className="size-8 hover:text-gray-200 transition-colors" />
             </button>
           </div>
         </motion.div>
 
-        {isFetchingNextPage && (
-          <div className="mt-4">
-            <p className="text-sm text-neutral-400">Loading more poses...</p>
-          </div>
+        {/* 모달 - 시간 선택 */}
+        {isModalOpen && (
+          <motion.div
+            className="absolute z-30"
+            style={{
+              top: `${modalPosition.top - 100}px`,
+              left: `${modalPosition.left}px`,
+              width: `${modalPosition.width}px`,
+            }}
+            onClick={(e) => e.stopPropagation()}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1, transition: { duration: 0.2 } }}
+            exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.2 } }}
+          >
+            <div className="bg-white p-6 rounded-2xl shadow-xl z-20">
+              <div className="space-y-2">
+                {timeOptions.map((option) => (
+                  <button
+                    key={option.value}
+                    onClick={() => handleSelectChange(option.value)}
+                    className="block w-full py-3 text-lg font-medium text-gray-900 rounded-lg hover:bg-gray-200 transition-colors"
+                  >
+                    {option.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </motion.div>
         )}
       </motion.div>
     </AnimatePresence>

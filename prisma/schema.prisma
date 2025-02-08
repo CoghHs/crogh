@@ -61,10 +61,12 @@ model Like {
 model Favorite {
   id         Int      @id @default(autoincrement())
   imageId    String
+  imageUrl   String
   userId     Int
+  category   String
   created_at DateTime @default(now())
 
   user User @relation(fields: [userId], references: [id])
 
-  @@unique([userId, imageId]) // userId와 imageId 조합을 유니크로 설정
+  @@unique([userId, imageId, category])
 }

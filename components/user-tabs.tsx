@@ -8,7 +8,7 @@ export default function UserTabs({ user }: any) {
 
   return (
     <div className="mt-10 flex flex-col">
-      <div className="tabs flex justify-center items-center space-x-12 font-medium ">
+      <div className="tabs flex justify-center items-center space-x-12 font-medium">
         <button
           onClick={() => setActiveTab("tweets")}
           className={`px-4 py-2 border-b-2 ${
@@ -37,9 +37,17 @@ export default function UserTabs({ user }: any) {
         )}
         {activeTab === "favorites" && (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            {user?.Favorite?.map((fav: any) => (
-              <FavoriteList key={fav.id} imageId={fav.imageId} id={fav.id} />
-            ))}
+            {user?.Favorite?.map((fav: any) => {
+              return (
+                <FavoriteList
+                  key={fav.id}
+                  imageId={fav.imageId}
+                  imageUrl={fav.imageUrl}
+                  id={fav.id}
+                  category={fav.category}
+                />
+              );
+            })}
           </div>
         )}
       </div>

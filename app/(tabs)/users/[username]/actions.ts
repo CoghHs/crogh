@@ -14,6 +14,8 @@ export async function getUser(username: string) {
         select: {
           id: true,
           imageId: true,
+          category: true,
+          imageUrl: true,
         },
       },
       tweet: {
