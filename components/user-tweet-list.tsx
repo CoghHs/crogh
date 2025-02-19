@@ -16,7 +16,8 @@ export default function UserListTweet({ photo, id }: ListTweetProps) {
       <div className="relative size-28 overflow-hidden rounded-md">
         <Image
           className="object-cover"
-          fill
+          width={200}
+          height={200}
           src={`${photo}/home`}
           alt={photo}
         />

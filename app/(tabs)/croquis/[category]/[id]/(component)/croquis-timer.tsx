@@ -46,7 +46,7 @@ export default function CroquisTimer({ userId }: { userId: number }) {
   return (
     <AnimatePresence>
       <motion.div
-        className="flex flex-col h-screen justify-center items-center"
+        className="flex flex-col relative h-screen justify-center items-center"
         ref={constraintsRef}
       >
         {/* 로딩 스피너 */}
@@ -59,12 +59,11 @@ export default function CroquisTimer({ userId }: { userId: number }) {
         <Image
           src={pose.urls.regular}
           alt={pose.alt_description}
-          layout="fill"
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           priority
-          className={`z-0 pt-24 pb-6 px-10 object-contain ${
-            isImageLoaded ? "block" : "hidden"
-          }`}
-          onLoadingComplete={() => setIsImageLoaded(true)}
+          className={`z-0 object-contain ${isImageLoaded ? "block" : "hidden"}`}
+          onLoad={() => setIsImageLoaded(true)}
         />
 
         {/* 타이머 및 버튼 */}

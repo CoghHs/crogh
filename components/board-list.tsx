@@ -28,7 +28,8 @@ export default function BoardList({
           className="object-cover w-full h-full group-hover:opacity-80 transition-opacity duration-300"
           src={`${photo}/home`}
           alt={title}
-          fill
+          width={300}
+          height={300}
           priority
         />
         <div className="absolute inset-0 bg-black bg-opacity-70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">

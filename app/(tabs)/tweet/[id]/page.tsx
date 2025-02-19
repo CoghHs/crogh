@@ -123,6 +123,7 @@ export default async function TweetDetail({
         <Image
           className="rounded-lg object-contain"
           fill
+          priority
           src={`${tweet.photo}/homenav`}
           alt={tweet.title}
         />
