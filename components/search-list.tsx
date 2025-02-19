@@ -20,7 +20,7 @@ export default function SearchList({
     }
   }, [keyword]);
   return (
-    <div className="p-5 flex flex-col gap-5">
+    <div className="grid grid-cols-5 space-x-2 ">
       {tweets.map((tweet) => (
         <ListTweet key={tweet.id} {...tweet} />
       ))}

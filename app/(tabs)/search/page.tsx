@@ -14,8 +14,9 @@ export default async function SearchResults({
   const results = await getSearchResults(keyword);
   return (
     <div className="p-4">
-      <h1 className="text-2xl text-center font-medium mb-4">
-        {keyword}로 검색한 결과입니다
+      <h1 className="text-2xl text-center font-bold mb-4">
+        {keyword}{" "}
+        <span className="text-gray-700 font-normal">검색한 결과입니다</span>
       </h1>
       <div>
         <SearchList initialTweets={results} keyword={keyword} />

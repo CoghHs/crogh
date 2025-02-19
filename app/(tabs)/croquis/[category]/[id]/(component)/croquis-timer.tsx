@@ -96,11 +96,7 @@ export default function CroquisTimer({ userId }: { userId: number }) {
         </motion.div>
 
         {isModalOpen && (
-          <TimeModal
-            position={modalPosition}
-            onSelect={handleSelectChange}
-            onClose={() => setIsModalOpen}
-          />
+          <TimeModal position={modalPosition} onSelect={handleSelectChange} />
         )}
       </motion.div>
     </AnimatePresence>

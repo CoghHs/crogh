@@ -17,14 +17,15 @@ export default function FavoriteList({
   return (
     <Link
       className="flex gap-5 items-center"
-      href={`/users/${username}/favorite/${category}/${imageId}`} // 이미지 고유 ID로 링크
+      href={`/users/${username}/favorite/${category}/${imageId}`}
     >
-      <div className="rounded-md">
+      <div className="relative size-28 overflow-hidden rounded-md group">
+        <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-50 transition-opacity duration-300" />
         <Image
           className="object-cover size-28 rounded-md"
           width={500}
           height={40}
-          src={imageUrl} // 완성된 이미지 URL을 사용
+          src={imageUrl}
           alt={imageId}
         />
       </div>

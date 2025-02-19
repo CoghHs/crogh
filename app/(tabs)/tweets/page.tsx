@@ -28,20 +28,12 @@ export const metadata = {
 
 export const dynamic = "force-dynamic";
 
-// export const revalidate = 60;
-
 export default async function Tweets() {
   const initialTweets = await getInitialTweets();
-  const revalidate = async () => {
-    "use server";
-    revalidatePath("/tweets");
-  };
+
   return (
     <div>
       <TweetList initialTweets={initialTweets} />
-      {/* <form action={revalidate}>
-        <button>Revalidate</button>
-      </form> */}
     </div>
   );
 }

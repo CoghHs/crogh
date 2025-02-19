@@ -5,20 +5,15 @@ import { timeOptions } from "@/constants";
 interface TimeModalProps {
   position: { top: number; left: number; width: number };
   onSelect: (time: number) => void;
-  onClose: () => void;
 }
 
-export default function TimeModal({
-  position,
-  onSelect,
-  onClose,
-}: TimeModalProps) {
+export default function TimeModal({ position, onSelect }: TimeModalProps) {
   return (
     <motion.div
       className="absolute z-30"
       style={{
         top: `${position.top - 100}px`,
-        left: `${position.left}px`,
+        left: `${position.left - 40}px`,
         width: `${position.width}px`,
       }}
       initial={{ opacity: 0, scale: 0.95 }}

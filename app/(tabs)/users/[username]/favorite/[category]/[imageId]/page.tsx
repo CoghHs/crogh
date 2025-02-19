@@ -44,7 +44,7 @@ export default async function FavoriteDetail({
     <div>
       <ClientFavoriteDetail user={user} image={image} />
 
-      {/* <div>
+      <div>
         <div className="flex items-center">
           <span className="font-extralight text-8xl font-serif">FAVORITE</span>
           <div className="w-full h-0.5 bg-black" />
@@ -62,7 +62,7 @@ export default async function FavoriteDetail({
             );
           })}
         </div>
-      </div> */}
+      </div>
     </div>
   );
 }

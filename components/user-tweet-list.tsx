@@ -13,7 +13,8 @@ interface ListTweetProps {
 export default function UserListTweet({ photo, id }: ListTweetProps) {
   return (
     <Link className="flex items-center justify-center" href={`/tweet/${id}`}>
-      <div className="relative size-28 overflow-hidden rounded-md">
+      <div className="relative size-28 overflow-hidden rounded-md group">
+        <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity" />
         <Image
           className="object-cover"
           width={200}

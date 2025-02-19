@@ -5,7 +5,11 @@ import db from "@/lib/db";
 export async function getSearchResults(keyword: string) {
   const results = await db.tweet.findMany({
     where: {
-      OR: [{ title: { contains: keyword } }],
+      OR: [
+        { title: { contains: keyword } },
+        { description: { contains: keyword } },
+        { user: { username: { contains: keyword } } },
+      ],
     },
     select: {
       id: true,

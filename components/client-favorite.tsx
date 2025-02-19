@@ -52,7 +52,7 @@ export default function ClientFavoriteDetail({
   return (
     <AnimatePresence>
       <motion.div
-        className="flex flex-col h-screen justify-center items-center"
+        className="flex flex-col relative h-screen justify-center items-center"
         ref={constraintsRef}
       >
         {!isImageLoaded && (
@@ -66,7 +66,8 @@ export default function ClientFavoriteDetail({
           alt={image.imageId}
           fill
           priority
-          className="z-0 pt-24 pb-6 px-10 object-contain"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className="z-0 pb-6 object-contain"
         />
 
         {/* 타이머 관련 UI */}
@@ -104,12 +105,11 @@ export default function ClientFavoriteDetail({
             </div>
 
             {/* 타이머 모달 위치 설정 */}
-            <div className="absolute top-0 -left-6">
+            <div className="absolute top-0 left-4">
               {isModalOpen && (
                 <TimeModal
                   position={modalPosition}
                   onSelect={handleSelectChange}
-                  onClose={() => setIsModalOpen(false)}
                 />
               )}
             </div>
