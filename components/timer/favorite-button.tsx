@@ -23,7 +23,7 @@ export default function FavoriteButton({
   useEffect(() => {
     const checkFavorite = async () => {
       const res = await fetch(
-        `/api/favorite/status?imageId=${imageId}&userId=${userId}&category=${category}` // 카테고리 추가
+        `/api/favorite/status?imageId=${imageId}&userId=${userId}&category=${category}`
       );
       if (res.ok) {
         const data = await res.json();
@@ -34,7 +34,7 @@ export default function FavoriteButton({
     };
 
     checkFavorite();
-  }, [imageId, userId, category]); // 카테고리 추가
+  }, [imageId, userId, category]); // imageId가 변경될 때마다 상태를 새로 확인
 
   const onClick = async () => {
     try {

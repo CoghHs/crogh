@@ -40,10 +40,10 @@ export default function UserTabs({ user }: any) {
             {user?.Favorite?.map((fav: any) => {
               return (
                 <FavoriteList
+                  username={user.username}
                   key={fav.id}
                   imageId={fav.imageId}
                   imageUrl={fav.imageUrl}
-                  id={fav.id}
                   category={fav.category}
                 />
               );

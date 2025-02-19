@@ -13,7 +13,6 @@ export async function getInitialTweets() {
       photo: true,
       id: true,
     },
-    // take: 1, caching 예제를 위한 비활성화
     orderBy: {
       created_at: "asc",
     },

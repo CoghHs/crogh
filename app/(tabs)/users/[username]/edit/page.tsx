@@ -65,7 +65,7 @@ const EditProfile = ({ params }: { params: { username: string } }) => {
   };
 
   return (
-    <div>
+    <div className="max-w-4xl mx-auto p-5">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col gap-5 p-5"
@@ -75,9 +75,9 @@ const EditProfile = ({ params }: { params: { username: string } }) => {
           className="border-2 aspect-square flex justify-center items-center flex-col text-neutral-300 border-neutral-300 rounded-md border-dashed cursor-pointer bg-center bg-cover"
           style={{ backgroundImage: `url(${preview})` }}
         >
-          {preview === "" ? (
+          {!preview ? (
             <>
-              <PhotoIcon className="w-20" />
+              <PhotoIcon className="w-20 h-20 text-neutral-400" />
               <div className="text-neutral-400 text-sm">
                 사진을 추가해주세요.
                 {errors.avatar?.message}

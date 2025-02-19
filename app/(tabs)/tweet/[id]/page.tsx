@@ -1,12 +1,12 @@
-import { formatToTimeAgo } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
-import { UserIcon } from "@heroicons/react/24/solid";
+import { TrashIcon, UserIcon } from "@heroicons/react/24/solid";
 import { unstable_cache as nextCache } from "next/cache";
 import db from "@/lib/db";
 import getSession from "@/lib/session";
 import { notFound, redirect } from "next/navigation";
 import LikeButton from "@/components/like-button";
+import UserListTweet from "@/components/user-tweet-list";
 
 async function getIsOwner(userId: number) {
   const session = await getSession();
@@ -66,6 +66,21 @@ async function getTweetTitle(id: number) {
   return tweet;
 }
 
+async function getUserTweets(userId: number) {
+  const userTweets = await db.tweet.findMany({
+    where: { userId },
+    select: {
+      id: true,
+      title: true,
+      description: true,
+      photo: true,
+      created_at: true,
+      updated_at: true,
+    },
+  });
+  return userTweets;
+}
+
 export async function generateMetadata({ params }: { params: { id: string } }) {
   const tweet = await getTweetTitle(Number(params.id));
   return {
@@ -73,6 +88,7 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
   };
 }
 
+// TweetDetail 컴포넌트
 export default async function TweetDetail({
   params,
 }: {
@@ -91,6 +107,8 @@ export default async function TweetDetail({
   const isOwner = await getIsOwner(tweet.user.id);
   const { likeCount, isLiked } = await getCachedLikeStatus(id);
 
+  const userTweets = await getUserTweets(tweet.user.id);
+
   const onDelete = async () => {
     "use server";
     if (!isOwner) return;
@@ -99,46 +117,75 @@ export default async function TweetDetail({
   };
 
   return (
-    <div className="flex flex-col md:flex-row h-screen p-10 gap-5">
-      <div className="flex-1 relative">
+    <div className="flex flex-col md:flex-row h-screen">
+      {/* 이미지 영역 */}
+      <div className="w-5/6 relative rounded-2xl shadow-md">
         <Image
-          className="rounded-lg object-cover"
+          className="rounded-lg object-contain"
           fill
           src={`${tweet.photo}/homenav`}
           alt={tweet.title}
         />
       </div>
-      <div className="flex-1 flex flex-col">
-        <div className="flex items-center gap-3 mb-5 border-b border-neutral-500 pb-3">
-          <div className="w-12 h-12 overflow-hidden rounded-full">
-            {tweet.user.avatar ? (
-              <Image
-                src={`${tweet.user.avatar}/bigavatar`}
-                width={48}
-                height={48}
-                alt={tweet.user.username}
-              />
-            ) : (
-              <UserIcon className="w-12 h-12 text-gray-500" />
-            )}
+
+      {/* 정보 영역 */}
+      <div className="flex w-1/3 flex-col p-6 bg-white shadow-md rounded-2xl space-y-1">
+        {/* 유저 정보 섹션 */}
+        <div className="p-4 rounded-lg">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <div className="w-20 h-20 overflow-hidden rounded-full">
+                {tweet.user.avatar ? (
+                  <Image
+                    src={`${tweet.user.avatar}/bigavatar`}
+                    width={100}
+                    height={100}
+                    alt={tweet.user.username}
+                    className="object-cover"
+                  />
+                ) : (
+                  <UserIcon className="w-20 h-20 text-gray-500" />
+                )}
+              </div>
+              <div>
+                <h3 className="text-2xl font-medium text-gray-900">
+                  {tweet.user.username}
+                </h3>
+              </div>
+            </div>
+            <LikeButton isLiked={isLiked} likeCount={likeCount} tweetId={id} />
           </div>
-          <div>
-            <h3 className="text-lg font-semibold">{tweet.user.username}</h3>
-          </div>
-        </div>
-        <div className="mb-5">
-          <h1 className="text-3xl font-semibold mb-2">{tweet.title}</h1>
-          <p className="text-gray-700 mb-2">{tweet.description}</p>
-        </div>
-        <div className="flex justify-between items-center">
           {isOwner && (
-            <form action={onDelete}>
-              <button className="bg-red-500 text-white rounded-md font-semibold px-5 py-2.5">
-                Delete tweet
+            <form action={onDelete} className="mt-2">
+              <button className="text-neutral-400 hover:text-red-500 transition duration-200 flex items-center gap-1">
+                <TrashIcon className="w-6 h-6" />
+                <span>Delete</span>
               </button>
             </form>
           )}
-          <LikeButton isLiked={isLiked} likeCount={likeCount} tweetId={id} />
+        </div>
+
+        {/* 게시물 정보 섹션 */}
+        <div className="p-4 rounded-lg bg-gray-100">
+          <h1 className="text-4xl font-semibold text-gray-800 mb-2">
+            {tweet.title}
+          </h1>
+          <p className="text-gray-600 text-lg ">{tweet.description}</p>
+        </div>
+
+        {/* 유저의 다른 게시물 섹션 */}
+        <div>
+          <div className="text-neutral-500 mb-2 mt-2">
+            More by{" "}
+            <span className="font-bold text-xl text-neutral-600">
+              {tweet.user.username}
+            </span>
+          </div>
+          <div className="grid grid-cols-3 gap-1">
+            {userTweets.map((userTweet: any) => (
+              <UserListTweet key={userTweet.id} {...userTweet} />
+            ))}
+          </div>
         </div>
       </div>
     </div>

@@ -17,14 +17,15 @@ export default async function CategoryList({ query, text }: CategoryListProps) {
       <Link href={dynamicLink} className="relative w-full">
         <div className="relative w-full h-80 group">
           <Image
-            width={600}
+            width={500}
             height={100}
-            className="w-full h-full object-cover rounded-lg group-hover:opacity-80  transition-all  duration-300"
-            src={pose.urls.full}
+            className="w-full h-full object-cover rounded-lg"
+            src={pose.urls.regular}
             alt={pose.alt_description}
           />
-          <div className="absolute inset-0 bg-black bg-opacity-70 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center rounded-lg">
-            <span className="text-white rounded-full font-extrabold text-2xl font-serif flex px-6 text-shadow">
+          <div className="absolute inset-0 bg-black opacity-60 group-hover:opacity-0 transition-opacity duration-200 rounded-lg" />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="text-white font-extrabold text-2xl font-serif text-shadow">
               {text}
             </span>
           </div>

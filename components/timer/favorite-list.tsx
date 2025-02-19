@@ -4,19 +4,20 @@ import Link from "next/link";
 interface FavoriteListProps {
   imageId: string; // Unsplash의 고유 식별자
   imageUrl: string;
-  id: number;
   category: string; // 카테고리 추가
+  username: string;
 }
 
 export default function FavoriteList({
   imageId,
   imageUrl,
   category,
+  username,
 }: FavoriteListProps) {
   return (
     <Link
       className="flex gap-5 items-center"
-      href={`/croquis/${category}/${imageId}`}
+      href={`/users/${username}/favorite/${category}/${imageId}`} // 이미지 고유 ID로 링크
     >
       <div className="rounded-md">
         <Image

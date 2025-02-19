@@ -98,14 +98,14 @@ export default function AddTweet() {
             backgroundImage: preview ? `url(${preview})` : undefined,
           }}
         >
-          {!preview && (
+          {!preview ? (
             <>
               <PhotoIcon className="w-20 h-20 text-neutral-400" />
               <div className="text-neutral-400 text-sm">
                 사진을 추가해주세요.
               </div>
             </>
-          )}
+          ) : null}
           <input
             type="file"
             id="photo"

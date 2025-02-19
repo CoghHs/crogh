@@ -44,19 +44,19 @@ export default function LikeButton({
   return (
     <button
       onClick={onClick}
-      className={`flex items-center gap-2 text-neutral-400 text-sm border border-neutral-400 rounded-full p-2 transition-colors ${
+      className={`flex items-center gap-2 text-lg rounded-lg transition-colors duration-300 ease-in-out transform ${
         state.isLiked
-          ? "bg-sky-500 text-white border-sky-500"
-          : "hover:bg-neutral-300"
-      }`}
+          ? "text-sky-500"
+          : "text-neutral-400 hover:text-neutral-600"
+      } p-2`}
     >
       {state.isLiked ? (
-        <HandThumbUpIcon className="size-5" />
+        <HandThumbUpIcon className="w-6 h-6" />
       ) : (
-        <OutlineHandThumbUpIcon className="size-5" />
+        <OutlineHandThumbUpIcon className="w-6 h-6" />
       )}
-      <span>
-        {state.isLiked ? state.likeCount : `공감하기 (${state.likeCount})`}
+      <span className={`ml-1 ${state.likeCount > 100 ? "font-bold" : ""}`}>
+        {state.likeCount}
       </span>
     </button>
   );
