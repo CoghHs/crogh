@@ -3,11 +3,10 @@
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 import { PhotoIcon } from "@heroicons/react/24/solid";
-
-import Timer from "./timer";
-import ImageNavigator from "./image-navigator";
-import TimeModal from "./time-model";
-import useCroquisTimer from "./use-croquis-timer";
+import ImageNavigator from "./ImageNavigator";
+import TimeModal from "./TimeModel";
+import TimerDisplay from "./TimerDisplay";
+import useCroquisTimer from "./UseCroquisTimer";
 
 export default function CroquisTimer({ userId }: { userId: number }) {
   const {
@@ -24,7 +23,6 @@ export default function CroquisTimer({ userId }: { userId: number }) {
     isPaused,
     isModalOpen,
     modalPosition,
-    setIsModalOpen,
     handleSelectChange,
     startTimer,
     handleNext,
@@ -74,7 +72,7 @@ export default function CroquisTimer({ userId }: { userId: number }) {
           dragConstraints={constraintsRef}
           dragElastic={1}
         >
-          <Timer
+          <TimerDisplay
             imageUrl={pose.urls.full}
             imageId={pose.id}
             userId={userId}

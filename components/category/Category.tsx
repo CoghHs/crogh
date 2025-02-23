@@ -1,8 +1,9 @@
 import { getInitialTweets } from "@/app/(tabs)/tweets/page";
-import CategoryList from "./category-list";
-import Board from "../board";
+
 import { CATEGORY_LIST } from "@/constants";
 import React from "react";
+import Board from "../board/Board";
+import CategoryList from "./CategoryList";
 
 export default async function CategoryBoardLayout() {
   const initialTweets = await getInitialTweets();

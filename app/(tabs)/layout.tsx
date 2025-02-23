@@ -1,4 +1,4 @@
-import TabBar from "@/components/tab-bar";
+import TabBar from "@/components/navigation/TabBar";
 import db from "@/lib/db";
 import getSession from "@/lib/session";
 import { notFound } from "next/navigation";

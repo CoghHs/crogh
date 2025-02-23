@@ -1,4 +1,4 @@
-import CategoryBoardLayout from "@/components/timer/category";
+import CategoryBoardLayout from "@/components/category/Category";
 import Image from "next/image";
 
 export default function Croquis() {

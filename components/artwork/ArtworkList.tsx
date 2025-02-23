@@ -2,10 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 
-import ListTweet from "./list-tweet";
 import { InitialTweets } from "@/app/(tabs)/tweets/page";
 import { getMoreTweets } from "@/app/(tabs)/tweets/actions";
 import Masonry from "react-masonry-css";
+import ArtworkItem from "./ArtworkItem";
 
 interface TweetListProps {
   initialTweets: InitialTweets;
@@ -19,7 +19,7 @@ const breakpoints = {
   300: 1,
 };
 
-export default function TweetList({ initialTweets }: TweetListProps) {
+export default function ArtworkList({ initialTweets }: TweetListProps) {
   const [tweets, setTweets] = useState(initialTweets);
   const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(0);
@@ -66,7 +66,7 @@ export default function TweetList({ initialTweets }: TweetListProps) {
         columnClassName="masonry-column"
       >
         {tweets.map((tweet) => (
-          <ListTweet key={tweet.id} {...tweet} />
+          <ArtworkItem key={tweet.id} {...tweet} />
         ))}
       </Masonry>
     </div>

@@ -1,18 +1,18 @@
-import { ForwardedRef, forwardRef, InputHTMLAttributes } from "react";
+import React, { InputHTMLAttributes, ForwardedRef } from "react";
 
-interface InputProps {
+interface CustomInputProps {
   name: string;
   errors?: string[];
 }
 
-const _Input = (
+function CustomInput(
   {
     name,
     errors = [],
     ...rest
-  }: InputProps & InputHTMLAttributes<HTMLInputElement>,
+  }: CustomInputProps & InputHTMLAttributes<HTMLInputElement>,
   ref: ForwardedRef<HTMLInputElement>
-) => {
+) {
   return (
     <div className="flex flex-col gap-2">
       <input
@@ -28,6 +28,7 @@ const _Input = (
       ))}
     </div>
   );
-};
+}
 
-export default forwardRef(_Input);
+// forwardRef 없이 바로 export default function으로 반환
+export default React.forwardRef(CustomInput);

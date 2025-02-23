@@ -1,15 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import ListTweet from "./list-tweet";
+
 import { InitialTweets } from "@/app/(tabs)/tweets/page";
+import ListTweet from "../artwork/ArtworkItem";
 
 interface SearchListProps {
   initialTweets: InitialTweets;
   keyword: string;
 }
 
-export default function SearchList({
+export default function SearchResult({
   initialTweets,
   keyword,
 }: SearchListProps) {

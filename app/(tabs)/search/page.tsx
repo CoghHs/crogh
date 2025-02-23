@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { getSearchResults } from "./actions";
-import SearchList from "@/components/search-list";
+import SearchResult from "@/components/search/SearchResult";
 
 export default async function SearchResults({
   searchParams,
@@ -19,7 +19,7 @@ export default async function SearchResults({
         <span className="text-gray-700 font-normal">검색한 결과입니다</span>
       </h1>
       <div>
-        <SearchList initialTweets={results} keyword={keyword} />
+        <SearchResult initialTweets={results} keyword={keyword} />
       </div>
     </div>
   );

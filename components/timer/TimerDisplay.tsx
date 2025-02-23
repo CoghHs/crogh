@@ -1,7 +1,7 @@
 // Timer.tsx
 import { ArrowPathIcon } from "@heroicons/react/24/solid";
 import { formatTime } from "@/lib/utils";
-import FavoriteButton from "@/components/timer/favorite-button";
+import FavoriteButton from "@/components/button/FavoriteButton";
 
 interface TimerProps {
   selectedTime: number;
@@ -15,7 +15,7 @@ interface TimerProps {
   currentCategory: string;
 }
 
-export default function Timer({
+export default function TimerDisplay({
   selectedTime,
   timeLeft,
   onReset,

@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import BoardList from "./board-list";
+
 import { InitialTweets } from "@/app/(tabs)/tweets/page";
+import BoardList from "./BoardList";
 
 interface TweetListProps {
   initialTweets: InitialTweets;

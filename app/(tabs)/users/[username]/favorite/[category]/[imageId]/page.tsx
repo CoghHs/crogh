@@ -1,5 +1,5 @@
-import ClientFavoriteDetail from "@/components/client-favorite";
-import FavoriteList from "@/components/timer/favorite-list";
+import FavoriteDetailView from "@/components/favorite/FavoriteDetailView";
+import FavoriteList from "@/components/favorite/FavoriteList";
 import db from "@/lib/db";
 import { notFound } from "next/navigation";
 
@@ -42,8 +42,7 @@ export default async function FavoriteDetail({
 
   return (
     <div>
-      <ClientFavoriteDetail user={user} image={image} />
-
+      <FavoriteDetailView user={user} image={image} />
       <div>
         <div className="flex items-center">
           <span className="font-extralight text-8xl font-serif">FAVORITE</span>

@@ -1,7 +1,7 @@
 "use client";
 
-import Button from "@/components/button";
-import Input from "@/components/input";
+import CustomButton from "@/components/common/CustomButton";
+import CustomInput from "@/components/common/CustomInput";
 import { PhotoIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
 import { getUploadUrl, uploadTweet } from "./actions";
@@ -116,7 +116,7 @@ export default function AddTweet() {
           />
         </label>
 
-        <Input
+        <CustomInput
           {...register("title")}
           required
           placeholder="제목"
@@ -124,7 +124,7 @@ export default function AddTweet() {
           errors={[errors.title?.message ?? ""]}
         />
 
-        <Input
+        <CustomInput
           {...register("description")}
           required
           placeholder="자세한 설명"
@@ -132,7 +132,7 @@ export default function AddTweet() {
           errors={[errors.description?.message ?? ""]}
         />
 
-        <Button text="작성 완료" />
+        <CustomButton text="작성 완료" />
       </form>
     </div>
   );

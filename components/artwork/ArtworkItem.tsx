@@ -16,7 +16,7 @@ function getRandomHeight() {
   return heights[Math.floor(Math.random() * heights.length)];
 }
 
-export default function ListTweet({ title, photo, id }: ListTweetProps) {
+export default function ArtworkItem({ title, photo, id }: ListTweetProps) {
   const randomHeightClass = getRandomHeight();
 
   return (

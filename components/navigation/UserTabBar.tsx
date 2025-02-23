@@ -1,9 +1,9 @@
 "use client";
 import { useState } from "react";
-import UserListTweet from "./user-tweet-list";
-import FavoriteList from "./timer/favorite-list";
+import FavoriteList from "../favorite/FavoriteList";
+import UserArtworkList from "../artwork/UserArtworkList";
 
-export default function UserTabs({ user }: any) {
+export default function UserTabBar({ user }: any) {
   const [activeTab, setActiveTab] = useState("tweets");
 
   return (
@@ -31,7 +31,7 @@ export default function UserTabs({ user }: any) {
         {activeTab === "tweets" && (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {user?.tweet?.map((tweet: any) => (
-              <UserListTweet key={tweet.id} user={user} {...tweet} />
+              <UserArtworkList key={tweet.id} user={user} {...tweet} />
             ))}
           </div>
         )}

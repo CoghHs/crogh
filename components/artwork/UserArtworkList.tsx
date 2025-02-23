@@ -10,7 +10,7 @@ interface ListTweetProps {
   };
 }
 
-export default function UserListTweet({ photo, id }: ListTweetProps) {
+export default function UserArtworkList({ photo, id }: ListTweetProps) {
   return (
     <Link className="flex items-center justify-center" href={`/tweet/${id}`}>
       <div className="relative size-28 overflow-hidden rounded-md group">

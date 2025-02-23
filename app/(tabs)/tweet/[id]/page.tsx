@@ -1,12 +1,11 @@
 import Image from "next/image";
-import Link from "next/link";
 import { TrashIcon, UserIcon } from "@heroicons/react/24/solid";
 import { unstable_cache as nextCache } from "next/cache";
 import db from "@/lib/db";
 import getSession from "@/lib/session";
 import { notFound, redirect } from "next/navigation";
-import LikeButton from "@/components/like-button";
-import UserListTweet from "@/components/user-tweet-list";
+import LikeButton from "@/components/button/LikeButton";
+import UserListTweet from "@/components/artwork/UserArtworkList";
 
 async function getIsOwner(userId: number) {
   const session = await getSession();

@@ -1,8 +1,7 @@
-import db from "@/lib/db";
 import getSession from "@/lib/session";
-import { notFound, redirect } from "next/navigation";
+import { redirect } from "next/navigation";
 
-export default function LogoutBtn() {
+export default function LogoutButton() {
   const logOut = async () => {
     "use server";
     const session = await getSession();

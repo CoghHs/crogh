@@ -1,7 +1,7 @@
 "use client";
 
-import Button from "@/components/button";
-import Input from "@/components/input";
+import CustomButton from "@/components/common/CustomButton";
+import CustomInput from "@/components/common/CustomInput";
 import { useFormState } from "react-dom";
 import { createAccount } from "./actions";
 import Link from "next/link";
@@ -22,21 +22,21 @@ export default function CreateAccount() {
         action={dispatch}
         className="flex flex-col w-1/2  justify-center mx-auto gap-6"
       >
-        <Input
+        <CustomInput
           name="username"
           type="text"
           placeholder="Username"
           required
           errors={state?.fieldErrors.username}
         />
-        <Input
+        <CustomInput
           name="email"
           type="email"
           placeholder="Email"
           required
           errors={state?.fieldErrors.email}
         />
-        <Input
+        <CustomInput
           name="password"
           type="password"
           placeholder="Password"
@@ -44,7 +44,7 @@ export default function CreateAccount() {
           minLength={PASSWORD_MIN_LENGTH}
           errors={state?.fieldErrors.password}
         />
-        <Input
+        <CustomInput
           name="confirm_password"
           type="password"
           placeholder="Confirm Password"
@@ -52,7 +52,7 @@ export default function CreateAccount() {
           minLength={PASSWORD_MIN_LENGTH}
           errors={state?.fieldErrors.confirm_password}
         />
-        <Button text="회원가입" />
+        <CustomButton text="회원가입" />
       </form>
       <div className="mx-auto">
         <span className="text-neutral-600">또는</span>

@@ -1,7 +1,7 @@
-import TweetList from "@/components/tweet-list";
+import ArtworkList from "@/components/artwork/ArtworkList";
 import db from "@/lib/db";
 import { Prisma } from "@prisma/client";
-import { unstable_cache as nextCache, revalidatePath } from "next/cache";
+import { unstable_cache as nextCache } from "next/cache";
 
 const getCachedProducts = nextCache(getInitialTweets, ["home-products"]);
 
@@ -33,7 +33,7 @@ export default async function Tweets() {
 
   return (
     <div>
-      <TweetList initialTweets={initialTweets} />
+      <ArtworkList initialTweets={initialTweets} />
     </div>
   );
 }

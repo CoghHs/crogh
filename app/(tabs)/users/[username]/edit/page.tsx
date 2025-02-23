@@ -4,13 +4,11 @@ import { useState, useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import Input from "@/components/input";
-import Button from "@/components/button";
+import CustomInput from "@/components/common/CustomInput";
+import CustomButton from "@/components/common/CustomButton";
 import { PhotoIcon } from "@heroicons/react/24/solid";
 import { getUserProfile, updateUserProfile } from "./actions";
 import { profileSchema } from "./schema";
-import getSession from "@/lib/session";
-import { redirect } from "next/navigation";
 
 type ProfileFormValues = z.infer<typeof profileSchema>;
 
@@ -93,33 +91,33 @@ const EditProfile = ({ params }: { params: { username: string } }) => {
           className="hidden"
           accept="image/*"
         />
-        <Input
+        <CustomInput
           {...register("username")}
           required
           placeholder="Username"
           type="text"
           errors={[errors.username?.message ?? ""]}
         />
-        <Input
+        <CustomInput
           {...register("email")}
           required
           placeholder="Email"
           type="email"
           errors={[errors.email?.message ?? ""]}
         />
-        <Input
+        <CustomInput
           {...register("bio")}
           placeholder="Bio"
           type="text"
           errors={[errors.bio?.message ?? ""]}
         />
-        <Input
+        <CustomInput
           {...register("password")}
           type="password"
           placeholder="New Password"
           errors={[errors.password?.message ?? ""]}
         />
-        <Button text="Update Profile" />
+        <CustomButton text="Update Profile" />
       </form>
     </div>
   );

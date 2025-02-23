@@ -1,7 +1,7 @@
 "use client";
 
-import FormButton from "@/components/button";
-import FormInput from "@/components/input";
+import CustomButton from "@/components/common/CustomButton";
+import CustomInput from "@/components/common/CustomInput";
 import { useFormState } from "react-dom";
 import { login } from "./actions";
 
@@ -21,14 +21,14 @@ export default function LogIn() {
         </h2>
       </div>
       <form action={dispatch} className="flex flex-col w-1/2 mx-auto gap-6">
-        <FormInput
+        <CustomInput
           name="email"
           type="email"
           placeholder="Email"
           required
           errors={state?.fieldErrors.email}
         />
-        <FormInput
+        <CustomInput
           name="password"
           type="password"
           placeholder="Password"
@@ -36,7 +36,7 @@ export default function LogIn() {
           minLength={PASSWORD_MIN_LENGTH}
           errors={state?.fieldErrors.password}
         />
-        <FormButton text="로그인" />
+        <CustomButton text="로그인" />
       </form>
       <div className="mx-auto">
         <span className="text-neutral-600">또는</span>

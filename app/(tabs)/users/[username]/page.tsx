@@ -1,12 +1,8 @@
 import Image from "next/image";
 import { getUser } from "./actions";
 import Link from "next/link";
-import UserListTweet from "@/components/user-tweet-list";
-import getSession from "@/lib/session";
-import { redirect } from "next/navigation";
-import LogoutBtn from "@/components/logout-button";
-import UserFavoriteList from "@/components/timer/favorite-list";
-import UserTabs from "@/components/user-tabs";
+import LogoutButton from "@/components/button/LogoutButton";
+import UserTabBar from "@/components/navigation/UserTabBar";
 
 export default async function User({
   params,
@@ -44,11 +40,11 @@ export default async function User({
           >
             프로필 수정
           </Link>
-          <LogoutBtn />
+          <LogoutButton />
         </div>
       </div>
 
-      <UserTabs user={user} />
+      <UserTabBar user={user} />
     </div>
   );
 }

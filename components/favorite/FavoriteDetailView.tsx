@@ -1,29 +1,28 @@
 "use client"; // 클라이언트 컴포넌트로 선언
 
 import { AnimatePresence, motion } from "motion/react";
-import ImageNavigator from "@/app/(tabs)/croquis/[category]/[id]/(component)/image-navigator";
-import TimeModal from "@/app/(tabs)/croquis/[category]/[id]/(component)/time-model";
-import Timer from "@/app/(tabs)/croquis/[category]/[id]/(component)/timer";
-import useCroquisTimer from "@/app/(tabs)/croquis/[category]/[id]/(component)/use-croquis-timer";
+import ImageNavigator from "@/components/timer/ImageNavigator";
+import TimeModal from "@/components/timer/TimeModel";
+import TimerDisplay from "@/components/timer/TimerDisplay";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import useCroquisTimer from "../timer/UseCroquisTimer";
 
-interface ClientFavoriteDetailProps {
+interface FavoriteDetailViewProps {
   user: any;
   image: any;
 }
 
-export default function ClientFavoriteDetail({
+export default function FavoriteDetailView({
   user,
   image,
-}: ClientFavoriteDetailProps) {
+}: FavoriteDetailViewProps) {
   const {
     selectedTime,
     timeLeft,
     isTimerRunning,
     isPaused,
     isModalOpen,
-    setIsModalOpen,
     setIsTimerRunning,
     handleSelectChange,
     startTimer,
@@ -82,7 +81,7 @@ export default function ClientFavoriteDetail({
 
           <div className="relative">
             <div className="flex justify-center items-center flex-col">
-              <Timer
+              <TimerDisplay
                 imageUrl={image.imageUrl}
                 imageId={image.imageId}
                 userId={user.id}
