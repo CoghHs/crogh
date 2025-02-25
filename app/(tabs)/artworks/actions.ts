@@ -2,8 +2,8 @@
 
 import db from "@/lib/db";
 
-export async function getMoreTweets(page: number) {
-  const tweet = await db.tweet.findMany({
+export async function getMoreArtworks(page: number) {
+  const artwork = await db.artwork.findMany({
     select: {
       title: true,
       created_at: true,
@@ -16,5 +16,5 @@ export async function getMoreTweets(page: number) {
       created_at: "asc",
     },
   });
-  return tweet;
+  return artwork;
 }

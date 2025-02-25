@@ -5,16 +5,16 @@ import db from "@/lib/db";
 import getSession from "@/lib/session";
 import { notFound, redirect } from "next/navigation";
 import LikeButton from "@/components/button/LikeButton";
-import UserListTweet from "@/components/artwork/UserArtworkList";
+import UserArtworkList from "@/components/artwork/UserArtworkList";
 
 async function getIsOwner(userId: number) {
   const session = await getSession();
   return session?.id === userId;
 }
 
-async function getTweet(id: number) {
+async function getArtwork(id: number) {
   try {
-    const tweet = await db.tweet.findUnique({
+    const artwork = await db.artwork.findUnique({
       where: { id },
       select: {
         id: true,
@@ -33,18 +33,18 @@ async function getTweet(id: number) {
         },
       },
     });
-    return tweet;
+    return artwork;
   } catch (e) {
     console.error(e);
     return null;
   }
 }
 
-async function getLikeStatus(tweetId: number, userId: number) {
+async function getLikeStatus(artworkId: number, userId: number) {
   const isLiked = await db.like.findUnique({
-    where: { id: { tweetId, userId } },
+    where: { id: { artworkId, userId } },
   });
-  const likeCount = await db.like.count({ where: { tweetId } });
+  const likeCount = await db.like.count({ where: { artworkId } });
   return { likeCount, isLiked: Boolean(isLiked) };
 }
 
@@ -57,16 +57,16 @@ async function getCachedLikeStatus(postId: number) {
   return cachedOperation(postId, userId!);
 }
 
-async function getTweetTitle(id: number) {
-  const tweet = await db.tweet.findUnique({
+async function getArtworkTitle(id: number) {
+  const artwork = await db.artwork.findUnique({
     where: { id },
     select: { title: true },
   });
-  return tweet;
+  return artwork;
 }
 
-async function getUserTweets(userId: number) {
-  const userTweets = await db.tweet.findMany({
+async function getUserArtworks(userId: number) {
+  const userArtworks = await db.artwork.findMany({
     where: { userId },
     select: {
       id: true,
@@ -77,18 +77,17 @@ async function getUserTweets(userId: number) {
       updated_at: true,
     },
   });
-  return userTweets;
+  return userArtworks;
 }
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
-  const tweet = await getTweetTitle(Number(params.id));
+  const artwork = await getArtworkTitle(Number(params.id));
   return {
-    title: tweet?.title,
+    title: artwork?.title,
   };
 }
 
-// TweetDetail 컴포넌트
-export default async function TweetDetail({
+export default async function ArtWorkDetail({
   params,
 }: {
   params: { id: string };
@@ -98,21 +97,21 @@ export default async function TweetDetail({
     return notFound();
   }
 
-  const tweet = await getTweet(id);
-  if (!tweet) {
+  const artwork = await getArtwork(id);
+  if (!artwork) {
     return notFound();
   }
 
-  const isOwner = await getIsOwner(tweet.user.id);
+  const isOwner = await getIsOwner(artwork.user.id);
   const { likeCount, isLiked } = await getCachedLikeStatus(id);
 
-  const userTweets = await getUserTweets(tweet.user.id);
+  const userArtworks = await getUserArtworks(artwork.user.id);
 
   const onDelete = async () => {
     "use server";
     if (!isOwner) return;
-    await db.tweet.delete({ where: { id } });
-    redirect("/tweets");
+    await db.artwork.delete({ where: { id } });
+    redirect("/artworks");
   };
 
   return (
@@ -123,8 +122,8 @@ export default async function TweetDetail({
           className="rounded-lg object-contain"
           fill
           priority
-          src={`${tweet.photo}/homenav`}
-          alt={tweet.title}
+          src={`${artwork.photo}/homenav`}
+          alt={artwork.title}
         />
       </div>
 
@@ -135,12 +134,12 @@ export default async function TweetDetail({
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <div className="w-20 h-20 overflow-hidden rounded-full">
-                {tweet.user.avatar ? (
+                {artwork.user.avatar ? (
                   <Image
-                    src={`${tweet.user.avatar}/bigavatar`}
+                    src={`${artwork.user.avatar}/bigavatar`}
                     width={100}
                     height={100}
-                    alt={tweet.user.username}
+                    alt={artwork.user.username}
                     className="object-cover"
                   />
                 ) : (
@@ -149,11 +148,15 @@ export default async function TweetDetail({
               </div>
               <div>
                 <h3 className="text-2xl font-medium text-gray-900">
-                  {tweet.user.username}
+                  {artwork.user.username}
                 </h3>
               </div>
             </div>
-            <LikeButton isLiked={isLiked} likeCount={likeCount} tweetId={id} />
+            <LikeButton
+              isLiked={isLiked}
+              likeCount={likeCount}
+              artworkId={id}
+            />
           </div>
           {isOwner && (
             <form action={onDelete} className="mt-2">
@@ -168,9 +171,9 @@ export default async function TweetDetail({
         {/* 게시물 정보 섹션 */}
         <div className="p-4 rounded-lg bg-gray-100">
           <h1 className="text-4xl font-semibold text-gray-800 mb-2">
-            {tweet.title}
+            {artwork.title}
           </h1>
-          <p className="text-gray-600 text-lg ">{tweet.description}</p>
+          <p className="text-gray-600 text-lg ">{artwork.description}</p>
         </div>
 
         {/* 유저의 다른 게시물 섹션 */}
@@ -178,12 +181,12 @@ export default async function TweetDetail({
           <div className="text-neutral-500 mb-2 mt-2">
             More by{" "}
             <span className="font-bold text-xl text-neutral-600">
-              {tweet.user.username}
+              {artwork.user.username}
             </span>
           </div>
           <div className="grid grid-cols-3 gap-1">
-            {userTweets.map((userTweet: any) => (
-              <UserListTweet key={userTweet.id} {...userTweet} />
+            {userArtworks.map((userArtwork: any) => (
+              <UserArtworkList key={userArtwork.id} {...userArtwork} />
             ))}
           </div>
         </div>

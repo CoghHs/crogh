@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const tweetSchema = z.object({
+export const artworkSchema = z.object({
   photo: z.string({
     required_error: "사진은 필수입니다.",
   }),
@@ -12,4 +12,4 @@ export const tweetSchema = z.object({
   }),
 });
 
-export type TweetType = z.infer<typeof tweetSchema>;
+export type ArtworkType = z.infer<typeof artworkSchema>;

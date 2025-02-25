@@ -3,10 +3,10 @@ import db from "@/lib/db";
 import { Prisma } from "@prisma/client";
 import { unstable_cache as nextCache } from "next/cache";
 
-const getCachedProducts = nextCache(getInitialTweets, ["home-products"]);
+// const getCachedProducts = nextCache(getInitialTweets, ["home-products"]);
 
-export async function getInitialTweets() {
-  const tweets = await db.tweet.findMany({
+export async function getInitialArtworks() {
+  const artworks = await db.artwork.findMany({
     select: {
       title: true,
       created_at: true,
@@ -17,10 +17,12 @@ export async function getInitialTweets() {
       created_at: "asc",
     },
   });
-  return tweets;
+  return artworks;
 }
 
-export type InitialTweets = Prisma.PromiseReturnType<typeof getInitialTweets>;
+export type InitialArtworks = Prisma.PromiseReturnType<
+  typeof getInitialArtworks
+>;
 
 export const metadata = {
   title: "Home",
@@ -28,12 +30,12 @@ export const metadata = {
 
 export const dynamic = "force-dynamic";
 
-export default async function Tweets() {
-  const initialTweets = await getInitialTweets();
+export default async function Artworks() {
+  const initialArtworks = await getInitialArtworks();
 
   return (
     <div>
-      <ArtworkList initialTweets={initialTweets} />
+      <ArtworkList initialArtworks={initialArtworks} />
     </div>
   );
 }

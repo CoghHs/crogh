@@ -1,14 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-
-import { InitialTweets } from "@/app/(tabs)/tweets/page";
-import { getMoreTweets } from "@/app/(tabs)/tweets/actions";
 import Masonry from "react-masonry-css";
 import ArtworkItem from "./ArtworkItem";
+import { InitialArtworks } from "@/app/(tabs)/artworks/page";
+import { getMoreArtworks } from "@/app/(tabs)/artworks/actions";
 
-interface TweetListProps {
-  initialTweets: InitialTweets;
+interface ArtworkListProps {
+  initialArtworks: InitialArtworks;
 }
 
 const breakpoints = {
@@ -19,8 +18,8 @@ const breakpoints = {
   300: 1,
 };
 
-export default function ArtworkList({ initialTweets }: TweetListProps) {
-  const [tweets, setTweets] = useState(initialTweets);
+export default function ArtworkList({ initialArtworks }: ArtworkListProps) {
+  const [artworks, setArtworks] = useState(initialArtworks);
   const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(0);
   const [isLastPage, setIsLastPage] = useState(false);
@@ -35,9 +34,9 @@ export default function ArtworkList({ initialTweets }: TweetListProps) {
         if (element.isIntersecting && trigger.current) {
           observer.unobserve(trigger.current);
           setIsLoading(true);
-          const newProducts = await getMoreTweets(page + 1);
+          const newProducts = await getMoreArtworks(page + 1);
           if (newProducts.length !== 0) {
-            setTweets((prev) => [...prev, ...newProducts]);
+            setArtworks((prev) => [...prev, ...newProducts]);
             setPage((prev) => prev + 1);
           } else {
             setIsLastPage(true);
@@ -65,8 +64,8 @@ export default function ArtworkList({ initialTweets }: TweetListProps) {
         className="flex space-x-2 overflow-hidden"
         columnClassName="masonry-column"
       >
-        {tweets.map((tweet) => (
-          <ArtworkItem key={tweet.id} {...tweet} />
+        {artworks.map((artwork) => (
+          <ArtworkItem key={artwork.id} {...artwork} />
         ))}
       </Masonry>
     </div>

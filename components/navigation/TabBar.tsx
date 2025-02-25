@@ -46,8 +46,8 @@ export default function TabBar({ username }: { username: string }) {
             <span className="px-5 py-2.5 rounded-3xl">크로키</span>
           )}
         </Link>
-        <Link href="/tweets" className="flex flex-col items-center gap-px">
-          {pathname === "/tweets" ? (
+        <Link href="/artworks" className="flex flex-col items-center gap-px">
+          {pathname === "/artworks" ? (
             <span className="px-5 py-2.5 bg-black text-white rounded-3xl">
               게시판
             </span>
@@ -55,8 +55,11 @@ export default function TabBar({ username }: { username: string }) {
             <span className="px-5 py-2.5 rounded-3xl">게시판</span>
           )}
         </Link>
-        <Link href="/tweets/add" className="flex flex-col items-center gap-px">
-          {pathname === "/tweets/add" ? (
+        <Link
+          href="/artworks/add"
+          className="flex flex-col items-center gap-px"
+        >
+          {pathname === "/artworks/add" ? (
             <span className="px-5 py-2.5 bg-black text-white rounded-3xl">
               올리기
             </span>

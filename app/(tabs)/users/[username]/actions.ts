@@ -18,7 +18,7 @@ export async function getUser(username: string) {
           imageUrl: true,
         },
       },
-      tweet: {
+      artwork: {
         select: {
           id: true,
           created_at: true,

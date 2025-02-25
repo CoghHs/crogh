@@ -19,7 +19,7 @@ export default async function SearchResults({
         <span className="text-gray-700 font-normal">검색한 결과입니다</span>
       </h1>
       <div>
-        <SearchResult initialTweets={results} keyword={keyword} />
+        <SearchResult initialArtworks={results} keyword={keyword} />
       </div>
     </div>
   );

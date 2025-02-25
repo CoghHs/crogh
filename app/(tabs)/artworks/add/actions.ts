@@ -3,22 +3,22 @@
 import db from "@/lib/db";
 import getSession from "@/lib/session";
 import { redirect } from "next/navigation";
-import { tweetSchema } from "./schema";
+import { artworkSchema } from "./schema";
 
-export async function uploadTweet(formData: FormData) {
+export async function uploadArtwork(formData: FormData) {
   const data = {
     photo: formData.get("photo"),
     title: formData.get("title"),
     description: formData.get("description"),
   };
 
-  const result = tweetSchema.safeParse(data);
+  const result = artworkSchema.safeParse(data);
   if (!result.success) {
     return result.error.flatten();
   } else {
     const session = await getSession();
     if (session.id) {
-      const tweet = await db.tweet.create({
+      const artwork = await db.artwork.create({
         data: {
           title: result.data.title,
           description: result.data.description,
@@ -33,7 +33,7 @@ export async function uploadTweet(formData: FormData) {
           id: true,
         },
       });
-      redirect(`/tweet/${tweet.id}`);
+      redirect(`/artwork/${artwork.id}`);
     }
   }
 }

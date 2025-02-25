@@ -4,11 +4,11 @@ import CustomButton from "@/components/common/CustomButton";
 import CustomInput from "@/components/common/CustomInput";
 import { PhotoIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
-import { getUploadUrl, uploadTweet } from "./actions";
+import { getUploadUrl, uploadArtwork } from "./actions";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { tweetSchema, TweetType } from "./schema";
+import { artworkSchema, ArtworkType } from "./schema";
 
 const fileSchema = z.object({
   type: z.string().refine((value) => value.includes("image"), {
@@ -19,7 +19,7 @@ const fileSchema = z.object({
   }),
 });
 
-export default function AddTweet() {
+export default function AddArtwork() {
   const [preview, setPreview] = useState<string | ArrayBuffer | null>(null);
   const [uploadUrl, setUploadUrl] = useState<string>("");
   const [file, setFile] = useState<File | null>(null);
@@ -28,8 +28,8 @@ export default function AddTweet() {
     handleSubmit,
     formState: { errors },
     setValue,
-  } = useForm<TweetType>({
-    resolver: zodResolver(tweetSchema),
+  } = useForm<ArtworkType>({
+    resolver: zodResolver(artworkSchema),
   });
 
   const onImageChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -65,7 +65,7 @@ export default function AddTweet() {
     }
   };
 
-  const onSubmit = async (data: TweetType) => {
+  const onSubmit = async (data: ArtworkType) => {
     if (!file) return;
 
     const cloudflareForm = new FormData();
@@ -83,7 +83,7 @@ export default function AddTweet() {
     formData.append("title", data.title);
     formData.append("description", data.description);
     formData.append("photo", data.photo);
-    return uploadTweet(formData);
+    return uploadArtwork(formData);
   };
 
   return (

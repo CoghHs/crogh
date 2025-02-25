@@ -3,18 +3,18 @@
 import { HandThumbUpIcon } from "@heroicons/react/24/solid";
 import { HandThumbUpIcon as OutlineHandThumbUpIcon } from "@heroicons/react/24/outline";
 import { useOptimistic, startTransition } from "react";
-import { dislikePost, likePost } from "@/app/(tabs)/tweet/[id]/actions";
+import { dislikePost, likePost } from "@/app/(tabs)/artwork/[id]/actions";
 
 interface LikeButtonProps {
   isLiked: boolean;
   likeCount: number;
-  tweetId: number;
+  artworkId: number;
 }
 
 export default function LikeButton({
   isLiked,
   likeCount,
-  tweetId,
+  artworkId,
 }: LikeButtonProps) {
   const [state, reducerFn] = useOptimistic(
     { isLiked, likeCount },
@@ -32,9 +32,9 @@ export default function LikeButton({
     });
     try {
       if (state.isLiked) {
-        await dislikePost(tweetId); // 서버 액션 직접 호출
+        await dislikePost(artworkId); // 서버 액션 직접 호출
       } else {
-        await likePost(tweetId); // 서버 액션 직접 호출
+        await likePost(artworkId); // 서버 액션 직접 호출
       }
     } catch (error) {
       console.error("Failed to update like status", error);

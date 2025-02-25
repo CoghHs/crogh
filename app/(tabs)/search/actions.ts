@@ -3,7 +3,7 @@
 import db from "@/lib/db";
 
 export async function getSearchResults(keyword: string) {
-  const results = await db.tweet.findMany({
+  const results = await db.artwork.findMany({
     where: {
       OR: [
         { title: { contains: keyword } },

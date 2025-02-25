@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-interface ListTweetProps {
+interface ListArtworkProps {
   photo: string;
   id: number;
   user: {
@@ -10,9 +10,9 @@ interface ListTweetProps {
   };
 }
 
-export default function UserArtworkList({ photo, id }: ListTweetProps) {
+export default function UserArtworkList({ photo, id }: ListArtworkProps) {
   return (
-    <Link className="flex items-center justify-center" href={`/tweet/${id}`}>
+    <Link className="flex items-center justify-center" href={`/artwork/${id}`}>
       <div className="relative size-28 overflow-hidden rounded-md group">
         <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity" />
         <Image

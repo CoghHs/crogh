@@ -1,12 +1,11 @@
-import { getInitialTweets } from "@/app/(tabs)/tweets/page";
-
 import { CATEGORY_LIST } from "@/constants";
 import React from "react";
 import Board from "../board/Board";
 import CategoryList from "./CategoryList";
+import { getInitialArtworks } from "@/app/(tabs)/artworks/page";
 
 export default async function CategoryBoardLayout() {
-  const initialTweets = await getInitialTweets();
+  const initialArtworks = await getInitialArtworks();
   return (
     <div className="flex flex-col mt-5">
       <div className="flex items-center">
@@ -37,7 +36,7 @@ export default async function CategoryBoardLayout() {
         <span className="font-extralight text-8xl font-serif">BOARD</span>
       </div>
       <div>
-        <Board initialTweets={initialTweets} />
+        <Board initialArtworks={initialArtworks} />
       </div>
     </div>
   );

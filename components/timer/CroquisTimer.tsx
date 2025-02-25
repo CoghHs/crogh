@@ -6,7 +6,7 @@ import { PhotoIcon } from "@heroicons/react/24/solid";
 import ImageNavigator from "./ImageNavigator";
 import TimeModal from "./TimeModel";
 import TimerDisplay from "./TimerDisplay";
-import useCroquisTimer from "./UseCroquisTimer";
+import useCroquisTimer from "./useCroquisTimer";
 
 export default function CroquisTimer({ userId }: { userId: number }) {
   const {

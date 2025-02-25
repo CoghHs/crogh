@@ -4,24 +4,24 @@ import db from "@/lib/db";
 import getSession from "@/lib/session";
 import { revalidateTag } from "next/cache";
 
-export async function likePost(tweetId: number) {
+export async function likePost(artworkId: number) {
   try {
     const session = await getSession();
     if (!session?.id) throw new Error("Unauthorized");
 
     await db.like.create({
       data: {
-        tweetId,
+        artworkId,
         userId: session.id!,
       },
     });
-    revalidateTag(`like-status-${tweetId}`);
+    revalidateTag(`like-status-${artworkId}`);
   } catch (e) {
     console.error(e);
   }
 }
 
-export async function dislikePost(tweetId: number) {
+export async function dislikePost(artworkId: number) {
   try {
     const session = await getSession();
     if (!session?.id) throw new Error("Unauthorized");
@@ -29,12 +29,12 @@ export async function dislikePost(tweetId: number) {
     await db.like.delete({
       where: {
         id: {
-          tweetId,
+          artworkId,
           userId: session.id!,
         },
       },
     });
-    revalidateTag(`like-status-${tweetId}`);
+    revalidateTag(`like-status-${artworkId}`);
   } catch (e) {
     console.error(e);
   }

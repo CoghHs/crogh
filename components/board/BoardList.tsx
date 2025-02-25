@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-interface ListTweetProps {
+interface ListArtworkProps {
   title: string;
   photo: string;
   id: number;
@@ -17,10 +17,10 @@ export default function BoardList({
   photo,
   id,
   colSpan,
-}: ListTweetProps) {
+}: ListArtworkProps) {
   return (
     <Link
-      href={`/tweet/${id}`}
+      href={`/artwork/${id}`}
       className={`relative w-full h-72 overflow-hidden rounded-3xl duration-300 ease-in-out shadow-md ${colSpan}`}
     >
       <div className="relative w-full h-full group">

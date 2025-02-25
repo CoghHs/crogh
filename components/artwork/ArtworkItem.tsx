@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-interface ListTweetProps {
+interface ListArtworkProps {
   title: string;
   photo: string;
   id: number;
@@ -16,12 +16,12 @@ function getRandomHeight() {
   return heights[Math.floor(Math.random() * heights.length)];
 }
 
-export default function ArtworkItem({ title, photo, id }: ListTweetProps) {
+export default function ArtworkItem({ title, photo, id }: ListArtworkProps) {
   const randomHeightClass = getRandomHeight();
 
   return (
     <Link
-      href={`/tweet/${id}`}
+      href={`/artwork/${id}`}
       className={`block overflow-hidden rounded-3xl shadow-md hover:shadow-xl transition-shadow duration-300 ease-in-out ${randomHeightClass} mb-6`}
     >
       <div className="relative w-full h-full group">
