@@ -7,7 +7,7 @@ import { notFound, redirect } from "next/navigation";
 import LikeButton from "@/components/button/LikeButton";
 import UserArtworkList from "@/components/artwork/UserArtworkList";
 
-async function getIsOwner(userId: number) {
+export async function getIsOwner(userId: number) {
   const session = await getSession();
   return session?.id === userId;
 }
@@ -185,7 +185,7 @@ export default async function ArtWorkDetail({
             </span>
           </div>
           <div className="grid grid-cols-3 gap-1">
-            {userArtworks.map((userArtwork: any) => (
+            {userArtworks.slice(0, 12).map((userArtwork: any) => (
               <UserArtworkList key={userArtwork.id} {...userArtwork} />
             ))}
           </div>

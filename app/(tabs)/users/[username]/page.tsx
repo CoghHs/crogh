@@ -3,6 +3,12 @@ import { getUser } from "./actions";
 import Link from "next/link";
 import LogoutButton from "@/components/button/LogoutButton";
 import UserTabBar from "@/components/navigation/UserTabBar";
+import getSession from "@/lib/session";
+
+export async function getIsOwner(userId: number) {
+  const session = await getSession();
+  return session?.id === userId;
+}
 
 export default async function User({
   params,
@@ -10,8 +16,11 @@ export default async function User({
   params: { username: string };
 }) {
   const user = await getUser(params.username);
+  const id = Number(user?.id);
+  const isOwner = await getIsOwner(id);
+
   return (
-    <div className=" flex flex-col items-center">
+    <div className="flex flex-col items-center">
       <div className="flex flex-col justify-center items-center gap-3">
         {user?.avatar ? (
           <Image
@@ -33,14 +42,20 @@ export default async function User({
             자기소개를 추가해보세요 !
           </span>
         )}
-        <div className="mt-3 flex gap-2">
-          <Link
-            className="bg-neutral-200 px-5 py-3 rounded-3xl text-lg text-neutral-700 hover:bg-neutral-300 transition"
-            href={`/users/${user?.username}/edit`}
-          >
-            프로필 수정
-          </Link>
-          <LogoutButton />
+        <div>
+          {isOwner ? (
+            <div className="mt-3 flex gap-2">
+              <Link
+                className="bg-neutral-200 px-5 py-3 rounded-3xl text-lg text-neutral-700 hover:bg-neutral-300 transition"
+                href={`/users/${user?.username}/edit`}
+              >
+                프로필 수정
+              </Link>
+              <LogoutButton />
+            </div>
+          ) : (
+            ""
+          )}
         </div>
       </div>
 

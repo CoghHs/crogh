@@ -3,8 +3,6 @@ import db from "@/lib/db";
 import { Prisma } from "@prisma/client";
 import { unstable_cache as nextCache } from "next/cache";
 
-// const getCachedProducts = nextCache(getInitialTweets, ["home-products"]);
-
 export async function getInitialArtworks() {
   const artworks = await db.artwork.findMany({
     select: {

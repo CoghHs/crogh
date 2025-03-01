@@ -22,6 +22,7 @@ export async function updateUserProfile(formData: FormData) {
   }
 
   const session = await getSession();
+
   if (session.id) {
     const updateData: any = {
       username: result.data.username,

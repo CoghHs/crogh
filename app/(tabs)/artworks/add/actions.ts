@@ -2,7 +2,6 @@
 
 import db from "@/lib/db";
 import getSession from "@/lib/session";
-import { redirect } from "next/navigation";
 import { artworkSchema } from "./schema";
 
 export async function uploadArtwork(formData: FormData) {
@@ -14,10 +13,25 @@ export async function uploadArtwork(formData: FormData) {
 
   const result = artworkSchema.safeParse(data);
   if (!result.success) {
-    return result.error.flatten();
+    return { error: result.error.flatten().fieldErrors };
   } else {
     const session = await getSession();
     if (session.id) {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const countTodayUploads = await db.artwork.count({
+        where: {
+          userId: session.id,
+          created_at: {
+            gte: today,
+          },
+        },
+      });
+
+      if (countTodayUploads >= 10) {
+        return { error: "하루에 10개 이상의 작품을 업로드할 수 없습니다." };
+      }
+
       const artwork = await db.artwork.create({
         data: {
           title: result.data.title,
@@ -33,7 +47,7 @@ export async function uploadArtwork(formData: FormData) {
           id: true,
         },
       });
-      redirect(`/artwork/${artwork.id}`);
+      return { id: artwork.id };
     }
   }
 }

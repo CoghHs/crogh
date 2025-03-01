@@ -6,7 +6,7 @@ import TimeModal from "@/components/timer/TimeModel";
 import TimerDisplay from "@/components/timer/TimerDisplay";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import useCroquisTimer from "../timer/UseCroquisTimer";
+import useCroquisTimer from "../../app/(tabs)/croquis/[category]/[id]/(hooks)/useCroquisTimer";
 
 interface FavoriteDetailViewProps {
   user: any;

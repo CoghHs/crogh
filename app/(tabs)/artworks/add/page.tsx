@@ -9,6 +9,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { artworkSchema, ArtworkType } from "./schema";
+import { useRouter } from "next/navigation";
 
 const fileSchema = z.object({
   type: z.string().refine((value) => value.includes("image"), {
@@ -23,6 +24,7 @@ export default function AddArtwork() {
   const [preview, setPreview] = useState<string | ArrayBuffer | null>(null);
   const [uploadUrl, setUploadUrl] = useState<string>("");
   const [file, setFile] = useState<File | null>(null);
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -68,22 +70,32 @@ export default function AddArtwork() {
   const onSubmit = async (data: ArtworkType) => {
     if (!file) return;
 
+    const formData = new FormData();
+    formData.append("title", data.title);
+    formData.append("description", data.description);
+    formData.append("photo", data.photo);
+
+    const artwork = await uploadArtwork(formData);
+
+    if (artwork?.error) {
+      alert(artwork.error);
+      return;
+    }
+
     const cloudflareForm = new FormData();
     cloudflareForm.append("file", file);
     const response = await fetch(uploadUrl, {
       method: "POST",
       body: cloudflareForm,
     });
+
     if (response.status !== 200) {
       alert("파일 업로드에 실패했습니다.");
       return;
     }
 
-    const formData = new FormData();
-    formData.append("title", data.title);
-    formData.append("description", data.description);
-    formData.append("photo", data.photo);
-    return uploadArtwork(formData);
+    alert("업로드가 성공적으로 완료되었습니다.");
+    router.push(`/artwork/${artwork?.id}`);
   };
 
   return (
