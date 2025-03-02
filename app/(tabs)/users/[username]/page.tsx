@@ -5,7 +5,7 @@ import LogoutButton from "@/components/button/LogoutButton";
 import UserTabBar from "@/components/navigation/UserTabBar";
 import getSession from "@/lib/session";
 
-export async function getIsOwner(userId: number) {
+async function getIsOwner(userId: number) {
   const session = await getSession();
   return session?.id === userId;
 }

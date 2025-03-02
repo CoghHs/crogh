@@ -7,7 +7,7 @@ import { notFound, redirect } from "next/navigation";
 import LikeButton from "@/components/button/LikeButton";
 import UserArtworkList from "@/components/artwork/UserArtworkList";
 
-export async function getIsOwner(userId: number) {
+async function getIsOwner(userId: number) {
   const session = await getSession();
   return session?.id === userId;
 }

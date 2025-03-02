@@ -46,7 +46,7 @@ export default function FavoriteDetailView({
       const { top, left, width } = timerRef.current.getBoundingClientRect();
       setModalPosition({ top: 0, left: 0, width });
     }
-  }, [isModalOpen]);
+  }, [isModalOpen, timerRef]);
 
   return (
     <AnimatePresence>

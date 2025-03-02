@@ -18,7 +18,7 @@ export default function SearchResult({
     if (keyword) {
       setArtworks(initialArtworks);
     }
-  }, [keyword]);
+  }, [keyword, initialArtworks]);
   return (
     <div className="grid grid-cols-5 space-x-2 ">
       {artworks.map((artwork) => (

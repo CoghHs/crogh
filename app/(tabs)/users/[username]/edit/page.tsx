@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import EditProfile from "./(components)/EditProfile";
 import { getUser } from "../actions";
 
-export async function getIsOwner(userId?: number) {
+async function getIsOwner(userId?: number) {
   const session = await getSession();
   return !!session?.id && !!userId && session.id === userId;
 }
