@@ -20,7 +20,7 @@ export default async function CategoryList({ query, text }: CategoryListProps) {
             width={500}
             height={100}
             className="w-full h-full object-cover rounded-lg"
-            src={pose.urls.regular}
+            src={`${pose.urls.raw}?w=1980&h=1024&q=85`}
             alt={pose.alt_description}
           />
           <div className="absolute inset-0 bg-black opacity-60 group-hover:opacity-0 transition-opacity duration-200 rounded-lg" />

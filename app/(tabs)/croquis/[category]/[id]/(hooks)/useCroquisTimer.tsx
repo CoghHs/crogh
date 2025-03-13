@@ -14,6 +14,7 @@ interface PoseProps {
   id: string;
   imageUrl: string;
   urls: {
+    raw: string;
     full: string;
     regular: string;
   };
