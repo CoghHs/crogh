@@ -17,10 +17,10 @@ export default async function CategoryList({ query, text }: CategoryListProps) {
       <Link href={dynamicLink} className="relative w-full">
         <div className="relative w-full h-80 group">
           <Image
-            width={500}
-            height={100}
+            width={pose.width}
+            height={pose.height}
             className="w-full h-full object-cover rounded-lg"
-            src={`${pose.urls.raw}?w=1980&h=1024&q=85`}
+            src={pose.urls.raw}
             alt={pose.alt_description}
           />
           <div className="absolute inset-0 bg-black opacity-60 group-hover:opacity-0 transition-opacity duration-200 rounded-lg" />

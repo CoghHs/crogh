@@ -30,5 +30,5 @@ function CustomInput(
   );
 }
 
-// forwardRef 없이 바로 export default function으로 반환
+// forwardRef 없이 바로 export default function으로 반환ㅌ
 export default React.forwardRef(CustomInput);

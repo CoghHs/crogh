@@ -55,10 +55,9 @@ export default function CroquisTimer({ userId }: { userId: number }) {
         )}
 
         <Image
-          src={`${pose.urls.raw}?w=1980&h=1024&q=85`}
+          src={pose.urls.regular}
           alt={pose.alt_description}
           fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           priority
           className={`z-0 object-contain ${isImageLoaded ? "block" : "hidden"}`}
           onLoad={() => setIsImageLoaded(true)}
