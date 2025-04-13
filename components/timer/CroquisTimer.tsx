@@ -2,7 +2,6 @@
 
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
-import { PhotoIcon } from "@heroicons/react/24/solid";
 import ImageNavigator from "./ImageNavigator";
 import TimeModal from "./TimeModel";
 import TimerDisplay from "./TimerDisplay";
@@ -32,14 +31,7 @@ export default function CroquisTimer({ userId }: { userId: number }) {
     currentCategory,
   } = useCroquisTimer(userId);
 
-  if (isLoading || !pose)
-    return (
-      <div className="flex justify-center items-center">
-        <div className="w-1/4 h-72 border-neutral-700 border-4 rounded-md border-dashed flex justify-center items-center text-neutral-700">
-          <PhotoIcon className="size-28" />
-        </div>
-      </div>
-    );
+  if (!pose) return null;
 
   return (
     <AnimatePresence>
@@ -47,10 +39,9 @@ export default function CroquisTimer({ userId }: { userId: number }) {
         className="flex flex-col relative h-screen justify-center items-center"
         ref={constraintsRef}
       >
-        {/* 로딩 스피너 */}
         {!isImageLoaded && (
-          <div className="absolute inset-0 z-0 flex justify-center items-center">
-            <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-gray-300"></div>
+          <div className="absolute inset-0 z-10 flex justify-center items-center bg-white">
+            <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-gray-300" />
           </div>
         )}
 
@@ -59,13 +50,14 @@ export default function CroquisTimer({ userId }: { userId: number }) {
           alt={pose.alt_description}
           fill
           priority
-          className={`z-0 object-contain ${isImageLoaded ? "block" : "hidden"}`}
+          className={`z-0 object-contain transition-opacity duration-300 ${
+            isImageLoaded ? "opacity-100" : "opacity-0"
+          }`}
           onLoad={() => setIsImageLoaded(true)}
         />
 
-        {/* 타이머 및 버튼 */}
         <motion.div
-          className="bg-black bg-opacity-30 rounded-2xl p-6 flex flex-col justify-center items-center shadow-lg z-10"
+          className="bg-black bg-opacity-30 rounded-2xl p-6 flex flex-col justify-center items-center shadow-lg z-20"
           ref={timerRef}
           drag
           dragConstraints={constraintsRef}
