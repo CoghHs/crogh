@@ -9,7 +9,9 @@ const publicOnlyUrls: Routes = {
   "/": true,
   "/login": true,
   "/create-account": true,
-  "/images/coghnobg.png": true,
+  "/images/gogh.png": true,
+  "/images/coghprofile.png": true,
+  "/images/drawing.png": true,
 };
 
 export async function middleware(request: NextRequest) {

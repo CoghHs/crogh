@@ -16,12 +16,7 @@ export default function LogIn() {
       <div className="md:block md:w-1/2 relative">
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="w-full h-full relative">
-            <Image
-              src="/images/drawing.png"
-              alt="drawing"
-              fill
-              className="object-cover"
-            />
+            <Image src="/images/drawing.png" alt="drawing" fill priority />
           </div>
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-white text-7xl font-serif font-bold">
