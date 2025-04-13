@@ -29,7 +29,13 @@ export default function Home() {
         </div>
 
         <div className="w-full h-full md:w-1/2 relative overflow-hidden">
-          <Image src="/images/gogh.png" alt="cogh" fill priority />
+          <Image
+            src="/images/gogh.png"
+            alt="cogh"
+            fill
+            priority
+            className="object-cover"
+          />
         </div>
       </div>
     </div>

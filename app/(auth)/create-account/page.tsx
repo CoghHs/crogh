@@ -16,7 +16,13 @@ export default function CreateAccount() {
       <div className="md:block md:w-1/2 relative">
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="w-3/4 h-3/4 relative">
-            <Image src="/images/coghprofile.png" alt="coghnono" fill priority />
+            <Image
+              src="/images/coghprofile.png"
+              alt="coghnono"
+              fill
+              priority
+              className="object-cover"
+            />
           </div>
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-white text-7xl font-serif font-bold">
