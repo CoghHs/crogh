@@ -27,7 +27,7 @@ export default async function TabLayout({
 }) {
   const username = await getUsername();
   return (
-    <div>
+    <div className="py-24 p-10">
       {children}
       <TabBar username={username!} />
     </div>

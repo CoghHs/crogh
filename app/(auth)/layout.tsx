@@ -6,7 +6,7 @@ export default async function AuthLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div>
+    <div className="pt-6">
       <AuthTabBar />
       {children}
     </div>

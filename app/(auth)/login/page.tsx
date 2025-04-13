@@ -6,16 +6,23 @@ import { login } from "./actions";
 import { PASSWORD_MIN_LENGTH } from "@/constants";
 import CustomButton from "@/components/common/CustomButton";
 import CustomInput from "@/components/common/CustomInput";
+import Image from "next/image";
 
 export default function LogIn() {
   const [state, dispatch] = useFormState(login, null);
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
-      {/* 왼쪽 이미지/아트 섹션 */}
-      <div className="hidden md:block md:w-1/2 bg-neutral-100 relative">
+      <div className="md:block md:w-1/2 relative">
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="w-3/4 h-3/4 bg-gradient-to-br from-blue-500 to-purple-500 rounded-2xl transform -rotate-6"></div>
+          <div className="w-full h-full relative">
+            <Image
+              src="/images/drawing.png"
+              alt="drawing"
+              fill
+              className="object-cover"
+            />
+          </div>
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-white text-7xl font-serif font-bold">
               CROGH
@@ -24,7 +31,6 @@ export default function LogIn() {
         </div>
       </div>
 
-      {/* 오른쪽 로그인 폼 */}
       <div className="w-full md:w-1/2 flex items-center justify-center p-10">
         <div className="w-full max-w-md">
           <div className="mb-10">
@@ -59,11 +65,11 @@ export default function LogIn() {
             <CustomButton text="로그인" />
           </form>
 
-          <p className="mt-8 text-center text-neutral-600">
+          <p className="mt-8 text-center text-neutral-500">
             아직 계정이 없나요?{" "}
             <Link
               href="/create-account"
-              className="text-blue-600 hover:text-blue-800 font-medium"
+              className="text-sky-500 hover:text-sky-700 font-medium"
             >
               회원가입
             </Link>

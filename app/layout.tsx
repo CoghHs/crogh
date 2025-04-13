@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} text-black py-24 p-10`}>
+      <body className={`${inter.className} text-black `}>
         <Providers>{children}</Providers>
       </body>
     </html>
