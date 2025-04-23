@@ -11,7 +11,6 @@ export default function CroquisTimer({ userId }: { userId: number }) {
   const {
     setIsTimerRunning,
     pose,
-    isLoading,
     isImageLoaded,
     setIsImageLoaded,
     timerRef,
@@ -33,6 +32,7 @@ export default function CroquisTimer({ userId }: { userId: number }) {
 
   if (!pose) return null;
 
+  const ImageUrl = `${pose.urls.regular}&w=1980&q=85`;
   return (
     <AnimatePresence>
       <motion.div
@@ -46,7 +46,7 @@ export default function CroquisTimer({ userId }: { userId: number }) {
         )}
 
         <Image
-          src={pose.urls.regular}
+          src={ImageUrl}
           alt={pose.alt_description}
           fill
           priority
